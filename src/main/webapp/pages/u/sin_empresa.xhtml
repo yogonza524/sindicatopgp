@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="html_add" xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Sindicato de Petroleo y Gas Privado - Santa Cruz</title>
+        <link rel="shortcut icon" href="#{resource['img:icon.png']}" />
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="materialize.css" />
+        <h:outputScript library="js" name="materialize.js" />
+        <h:outputScript library="js" name="app.js" />
+        <h:outputScript library="js" name="modernizr.js" />
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    </h:head>
+    <h:body class="fondo-grey">
+        <h:form>
+            <p:growl autoUpdate="true" />
+                <nav class="layer">
+                    <div class="nav-wrapper container">
+                      <a href="#!" class="brand-logo">Inicio</a>  
+                      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                      <ul class="right hide-on-med-and-down">
+                        <li><h:commandLink value="Cerrar sesion" actionListener="#{login.logout()}" /></li>
+                      </ul>
+                      <ul class="side-nav" id="mobile-demo">
+                        <li><h:commandLink value="Cerrar sesion" actionListener="#{login.logout()}" /></li>
+                      </ul>
+                    </div>
+                </nav>
+        </h:form>
+        <div class="container">
+            <h4 class="flow-text">Faltan los datos de la empresa</h4>
+            <p class="grey-text">
+                Por favor complete el siguiente formulario con los datos de la empresa a la que representa.
+            </p>
+            <h:form>
+                <div class="row">
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons grey-text prefix">grade</i>
+                        <h:inputText id="razon_social" required="true" validatorMessage="Razón social inválido. Mínimo 5. Máximo 75 caracteres." value="#{register.emp.razonSocial}" requiredMessage="Razón social obligatorio">
+                            <f:validateLength maximum="75" minimum="5" />
+                        </h:inputText>
+                        <h:outputLabel for="razon_social" value="Razón social" />
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons grey-text prefix">verified_user</i>
+                        <h:inputText id="responsable" required="true" validatorMessage="Responsable inválido" value="#{register.emp.responsable}" requiredMessage="Responsable obligatorio">
+                            <f:validateLength maximum="75" minimum="3" />
+                        </h:inputText>
+                        <h:outputLabel for="responsable" value="Responsable a cargo" />
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons grey-text prefix">assignment</i>
+                        <h:inputText id="act" required="true" validatorMessage="Actividad inválida. Mínimo 5. Máximo 75 caracteres" value="#{register.emp.actividadPrincipal}" requiredMessage="Actividad obligatoria">
+                            <f:validateLength maximum="75" minimum="5" />
+                        </h:inputText>
+                        <h:outputLabel for="act" value="Actividad principal" />
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons grey-text prefix">av_timer</i>
+                        <h:inputText id="inic_act" styleClass="datepicker" required="true" converterMessage="Error al convertir la fecha de inicio de actividad" value="#{register.emp.fechaInicioActividad}" requiredMessage="Fecha de inicio de actividad obligatoria">
+                            <f:converter converterId="materialDateConverter" />
+                            <f:validator validatorId="dateNowValidator" />
+                        </h:inputText>
+                        <h:outputLabel for="inic_act" value="Fecha de Inicio de Actividad" />
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons grey-text prefix">store</i>
+                        <h:inputText id="dom" required="true" validatorMessage="Domicilio inválido" value="#{register.emp.domicilio}" requiredMessage="Domicilio obligatorio">
+                            <f:validateLength maximum="75" minimum="3" />
+                        </h:inputText>
+                        <h:outputLabel for="dom" value="Domicilio" />
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons grey-text prefix">picture_in_picture</i>
+                        <h:inputText id="cuit" required="true" validator="cuitvalidator" value="#{register.emp.cuit}" requiredMessage="CUIT obligatorio" />
+                        <h:outputLabel for="cuit" value="CUIT" />
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons grey-text prefix">email</i>
+                        <h:inputText id="emp_mail" required="true" value="#{register.emp.email}" validatorMessage="Email con formato incorrecto" requiredMessage="Email obligatorio">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </h:inputText>
+                        <h:outputLabel for="emp_mail" value="Email" />
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons grey-text prefix">perm_phone_msg</i>
+                        <h:inputText id="tel" validatorMessage="Telefono inválido. Máximo 20 números" value="#{register.emp.telefonoUno}">
+                            <f:validateRegex pattern="\d{0,20}" />
+                        </h:inputText>
+                        <h:outputLabel for="tel" value="Teléfono" />
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons grey-text prefix">dialer_sip</i>
+                        <h:inputText id="alter" validatorMessage="Telefono alternativo inválido. Máximo 20 números" value="#{register.emp.telefonoDos}">
+                            <f:validateRegex pattern="\d{0,20}" />
+                        </h:inputText>
+                        <h:outputLabel for="alter" value="Teléfono alternativo" />
+                    </div>
+                    <div class="input-field col s12">
+                        <h:commandLink styleClass="waves-effect waves-light btn-large white-text" actionListener="#{register.executeEmpresa()}">
+                            <i class="material-icons right">play_arrow</i>Listo
+                        </h:commandLink>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        <script type="text/javascript" src="../js/materialize.js"></script>
+        <script>
+            $(".button-collapse").sideNav();
+            $('.tooltipped').tooltip({delay: 50});
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 50 years to control year
+                max: new Date()
+            });
+        </script>
+        <!--prism-->
+        <script type="text/javascript" src="../js/prism.js"></script>
+    </h:body>
+</html>
+

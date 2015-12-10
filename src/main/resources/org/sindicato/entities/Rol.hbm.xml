@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-dic-2015 16:29:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.sindicato.entities.Rol" table="rol" schema="public" optimistic-lock="version">
+        <comment>Representa el rol de cada usuario. Siempre un usuario debe tener un rol y solo uno.</comment>
+        <id name="id" type="string">
+            <column name="id" length="32" />
+            <generator class="identity" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="40" not-null="true" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_rol" length="32" />
+            </key>
+            <one-to-many class="org.sindicato.entities.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>

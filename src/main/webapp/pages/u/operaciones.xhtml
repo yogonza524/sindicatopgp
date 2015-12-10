@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="html_add" xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Sindicato de Petroleo y Gas Privado - Santa Cruz</title>
+        <link rel="shortcut icon" href="#{resource['img:icon.png']}" />
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="materialize.css" />
+        <h:outputScript library="js" name="materialize.js" />
+        <h:outputScript library="js" name="app.js" />
+        <h:outputScript library="js" name="modernizr.js" />
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    </h:head>
+    <h:body class="fondo-grey">
+        <h:form>
+            <p:growl autoUpdate="true" />
+            <nav class="layer">
+            <div class="nav-wrapper container">
+              <a href="#!" class="brand-logo">Operaciones</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="user_home.xhtml">Inicio</a></li>
+                <li><a href="datos.xhtml">Datos</a></li>
+                <li><h:commandLink value="Cerrar sesion" actionListener="#{login.logout()}" /></li>
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                <li><a href="user_home.xhtml">Inicio</a></li>
+                <li><a href="datos.xhtml">Datos</a></li>
+                <li><h:commandLink value="Cerrar sesion" actionListener="#{login.logout()}" /></li>
+              </ul>
+            </div>
+        </nav>
+        </h:form>
+        <div class="container">
+            <div class="row">
+                <div class="col s12 l4 m4">
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-action">
+                                <h4 class="grey-text center-align">
+                                    <i class="material-icons large">view_carousel</i>
+                                </h4>
+                                <h4 class="grey-text center-align">
+                                    Cuotas vencidas
+                                </h4>
+                                <h:form>
+                                    <ui:fragment rendered="#{operaciones.vencidas.size() gt 0}">
+                                        <div class="collection">
+                                            <ui:repeat value="#{operaciones.vencidas}" var="cuota" varStatus="status">
+                                                <h:commandLink actionListener="#{operaciones.setSelected(cuota)}" styleClass="collection-item" style="margin:0px;">
+                                                   <span class="grey-text">#{util.fullSimpleMonthArgDate(cuota.fechaVencimiento)}</span>
+                                                   <p:ajax update=":panel-selected" />
+                                                </h:commandLink>
+                                            </ui:repeat>
+                                        </div>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{operaciones.vencidas.size() eq 0}">
+                                        <ul class="collection">
+                                            <li class="collection-item grey-text">
+                                                No tiene cuotas vencidas a la fecha
+                                            </li>
+                                        </ul>
+                                    </ui:fragment>
+                                </h:form>
+                            </div>
+                        </div>
+                        <ul class="collection card">
+                            <li class="collection-item">
+                                <p class="grey-text">¿Cuanto debo pagar de mora?</p>
+                                <p>Debe abonar el importe declarado mas el 0,01% de dicho importe por cada día de mora</p>
+                            </li>
+                            <li class="collection-item">
+                                <p class="grey-text">¿Cómo pagar?</p>
+                                <p>Puede pagar depositando el monto calculado en cualquier Banco Nación o a traves de transferencia bancaria</p>
+                            </li>
+                        </ul>
+                        <div class="card">
+                            <div id="piechart_3d" style="max-height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l8 m8">
+                    <ui:fragment rendered="#{not empty operaciones.vencidas and operaciones.vencidas.size() gt 0}">
+                        <h:form id="panel-selected">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h4 class="grey-text center-align"><i class="material-icons large">airplay</i></h4>
+                                    <p class="grey-text center-align">
+                                        Cuota vencida hace #{util.diffNow(operaciones.selected.fechaVencimiento)} días. 
+                                    </p>
+                                    <div class="row">
+                                        <div class="input-field col s12 m6 l6">
+                                            <h:outputText styleClass="grey-text" value="Cantidad de empleados" />
+                                            <h:inputText value="#{operaciones.selected.cantidadEmpleados}" required="true" requiredMessage="Cantidad de empleados obligatoria" id="cantidad_empleados">
+                                                <f:convertNumber integerOnly="true" minIntegerDigits="1" maxIntegerDigits="5" />
+                                                <f:validator validatorId="naturalNumberValidator" />
+                                            </h:inputText>
+                                        </div>
+                                        <div class="input-field col s12 m6 l6">
+                                            <h:outputText styleClass="grey-text" value="Total remunerado" />
+                                            <h:inputText required="true" requiredMessage="Total de remuneraciones obligatorio" value="#{operaciones.selected.remuneracionTotal}" id="remuneraciones">
+                                                <f:convertNumber minFractionDigits="4" maxIntegerDigits="10" />
+                                                <f:validator validatorId="doublePositiveNumberValidator" />
+                                                <p:ajax event="keyup" update="subtotal intereses total" />
+                                            </h:inputText>
+                                        </div>
+                                        <div class="input-field col s6 m6 l4">
+                                            <h:outputText styleClass="grey-text" value="Subtotal: $#{operaciones.subTotal()}" id="subtotal" />
+                                        </div>
+                                        <div class="input-field col s6 m6 l4">
+                                            <h:outputText styleClass="grey-text" value="Intereses: $#{operaciones.intereses()}" id="intereses" />
+                                        </div>
+                                        <div class="input-field col s6 m6 l4">
+                                            <h:outputText styleClass="grey-text" value="Total: $#{operaciones.round(operaciones.subTotal() + operaciones.intereses())}" id="total" />
+                                        </div>
+                                        <div class="col s12">
+                                            <br />
+                                            <p:commandLink ajax="false" styleClass="waves-effect waves-light btn-large  blue-grey darken-1 center-align" value="Abonar" actionListener="#{operaciones.abonarVencida()}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </ui:fragment>
+                    <h:form id="form_cuotas">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col s12 m6 l5">
+                                        <div class="input-field">
+                                            <ui:fragment rendered="#{not empty operaciones.dropdownSelected}">
+                                                <h:selectOneMenu value="#{operaciones.dropdownSelected}" converter="cuotaconverter">
+                                                    <f:selectItems value="#{operaciones.lista}" var="cuota" itemLabel="#{cuota.periodo}-#{util.year(cuota.fechaEmision)}" itemValue="#{cuota}" />
+                                                    <p:ajax event="valueChange" update="form_cuotas:cuota_detail" />
+                                                </h:selectOneMenu>
+                                                <label>Cuotas</label>
+                                            </ui:fragment>
+                                            <ui:fragment rendered="#{empty operaciones.dropdownSelected}">
+                                                <select>
+                                                    <option disabled="true">No hay cuotas a mostrar</option>
+                                                </select>
+                                            </ui:fragment>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m6 l7">
+                                        <h:panelGroup layout="block" id="cuota_detail">
+                                            <ul class="collection">
+                                                <li class="collection-item grey-text">Emitida<span class="badge">#{util.fullSimpleArgDate(operaciones.dropdownSelected.fechaEmision)}</span></li>
+                                                <li class="collection-item grey-text">Vencimiento<span class="badge">#{util.fullSimpleArgDate(operaciones.dropdownSelected.fechaVencimiento)}</span></li>
+                                                <li class="collection-item grey-text">Cantidad de empleados<span class="badge">#{operaciones.dropdownSelected.cantidadEmpleados}</span></li>
+                                                <li class="collection-item grey-text">Total remunerado<span class="badge">#{operaciones.dropdownSelected.remuneracionTotal}</span></li>
+                                                <li class="collection-item grey-text">Subtotal<span class="badge">#{operaciones.dropdownSelected.importe}</span></li>
+                                                <li class="collection-item grey-text">Intereses<span class="badge">#{operaciones.dropdownSelected.intereses}</span></li>
+                                                <ui:fragment rendered="#{not empty operaciones.dropdownSelected}">
+                                                    <li class="collection-item grey-text">Total<span class="badge">#{util.round(operaciones.dropdownSelected.importe + operaciones.dropdownSelected.intereses)}</span></li>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{not empty operaciones.dropdownSelected}">
+                                                    <li class="collection-item">
+                                                        <h:commandLink actionListener="#{util.imprimirComprobante(operaciones.dropdownSelected)}" styleClass="btn-floating btn-large waves-effect waves-light blue-grey darken-1">
+                                                            <i class="material-icons">print</i>
+                                                        </h:commandLink>
+                                                    </li>
+                                                </ui:fragment>
+                                            </ul>
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <script><!-- Esto es un comentario -->
+            $(".button-collapse").sideNav();
+            $('.tooltipped').tooltip({delay: 50});
+            $('select').material_select(); 
+        </script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+          google.load("visualization", "1", {packages:["corechart"]});
+          google.setOnLoadCallback(drawChart);
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Porcentaje de cuotas'],
+              ['Pendiente',#{operaciones.pendiente()}],
+              ['Vencidas', #{operaciones.vencidas()}],
+              ['Avisadas', #{operaciones.avisadas()}],
+              ['Cerradas', #{operaciones.cerradas()}]
+            ]);
+
+            var options = {
+              title: 'Cuotas',
+              is3D: false,
+              slices: {
+                0: { color: 'rgb(184,183,202)' },
+                1: { color: 'rgb(82,107,129)' },
+                2: { color: 'rgb(81,80,105)' },
+                3: { color: 'rgb(63,89,122)' }
+              }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
+          }
+          
+          function resize () {
+                // change dimensions if necessary
+                drawChart();
+            }
+            if (window.addEventListener) {
+                window.addEventListener('resize', resize);
+            }
+            else {
+                window.attachEvent('onresize', resize);
+            }
+        </script>
+
+    </h:body>
+</html>
+

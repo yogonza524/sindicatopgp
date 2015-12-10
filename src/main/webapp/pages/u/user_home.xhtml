@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="html_add" xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Sindicato de Petroleo y Gas Privado - Santa Cruz</title>
+        <link rel="shortcut icon" href="#{resource['img:icon.png']}" />
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="materialize.css" />
+        <h:outputScript library="js" name="materialize.js" />
+        <h:outputScript library="js" name="app.js" />
+        <h:outputScript library="js" name="modernizr.js" />
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    </h:head>
+    <h:body class="fondo-grey">
+        <h:form>
+            <p:growl autoUpdate="true" />
+            <nav class="layer">
+            <div class="nav-wrapper container">
+              <a href="#!" class="brand-logo">Inicio</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="operaciones.xhtml">Operaciones</a></li>
+                <li><a href="datos.xhtml">Datos</a></li>
+                <li><h:commandLink value="Cerrar sesion" actionListener="#{login.logout()}" /></li>
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="operaciones.xhtml">Operaciones</a></li>
+                <li><a href="datos.xhtml">Datos</a></li>
+                <li><h:commandLink value="Cerrar sesion" actionListener="#{login.logout()}" /></li>
+              </ul>
+            </div>
+        </nav>
+        </h:form>
+      <!-- Page Layout here -->
+        <div class="container">
+        <div class="row">
+            <div class="col s12 m5 l5">
+                  <div class="card">
+            
+                  <ul class="collection">
+                      <li class="collection-item black-text "><h4 class="grey-text center-align"><i class="material-icons large">equalizer</i></h4><h4 class="center-align grey-text">Cuotas</h4></li>
+                    <li class="collection-item black-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cuota mensual por pagar">Pendiente<span class="badge">#{usuario.count_pendiente}</span></li>
+                    <li class="collection-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cuando el administrador corrobora que el pago fue realizado con éxito">Cerradas<span class="badge">#{usuario.count_gestionadas}</span></li>
+                    <li class="collection-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cuando Ud. realiza la emisión del comprobante y deposita el monto en la cuenta del sindicato">Avisadas<span class="badge blue-text" title="Esperando a ser gestionadas por la administración">#{usuario.count_avisadas}</span></li>
+                    <li class="collection-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cuando la cuota mensual ha llegado a la fecha de vencimiento">
+                        En Mora
+                        <ui:fragment rendered="#{usuario.count_vencidas gt 0}">
+                            <span class="badge">
+                                <a href="operaciones.xhtml" class="red-text" title="Se le generarán intereses por cada día de mora">#{usuario.count_vencidas}</a>
+                            </span>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{usuario.count_vencidas eq 0}">
+                            <span class="badge">#{usuario.count_vencidas}</span>
+                        </ui:fragment>
+                    </li>
+                  </ul>
+                          
+                  </div>
+                  <div class="card">
+                      <div class="card-content center-align">
+                          <p class="grey-text">
+                              La próxima cuota se emitirá el
+                          </p>
+                          <h4>
+                              #{util.fullSimpleMonthArgDate(usuario.empresa.fechaEmisionProximaCuota)}
+                          </h4>
+                      </div>
+                  </div>
+                <ui:fragment rendered="#{not empty usuario.pendiente}">
+                    <div class="card">
+                        <div class="card-content center-align">
+                            <p class="grey-text">
+                                La ultima cuota vence en
+                            </p>
+                            <h4>
+                                #{usuario.cantidad_dias_al_vencimiento} dias
+                            </h4>
+                        </div>
+                    </div>
+                </ui:fragment>
+                <div class="card">
+                    <div class="card-content center-align">
+                          <p class="grey-text">
+                              <i class="large material-icons">assignment_ind</i>
+                          </p>
+                          <h4>
+                              #{usuario.user.username}
+                          </h4>
+                    </div>
+                    <ul class="collection">
+                        <li class="collection-item">Empresa<span class="badge">#{usuario.user.empresa.razonSocial}</span></li>
+                        <li class="collection-item">Responsable<span class="badge">#{usuario.user.empresa.responsable}</span></li>
+                        <li class="collection-item">CUIT<span class="badge">#{usuario.user.empresa.cuit}</span></li>
+                        <li class="collection-item">Actividad<span class="badge">#{usuario.user.empresa.actividadPrincipal}</span></li>
+                        <li class="collection-item">Inicio de actividades<span class="badge">#{util.simpleArgDate(usuario.user.empresa.fechaInicioActividad)}</span></li>
+                        <li class="collection-item"><a href="datos.xhtml">Mas...</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-content center-align">
+                        <p class="grey-text">
+                            <i class="large material-icons">turned_in_not</i>
+                        </p>
+                        <h4 class="grey-text">
+                            Cuenta del Sindicato
+                        </h4>
+                    </div>
+                    <ul class="collection">
+                        <li class="collection-item">
+                            Banco <span class="badge">Nación</span>
+                        </li>
+                        <li class="collection-item">
+                            Cta Cte <span class="badge">721090034</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col s12 m7 l7">
+                <ui:fragment rendered="#{usuario.count_vencidas gt 0}">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3 class="red-text center-align"><i class="large material-icons">error</i></h3>
+                            <p class="grey-text center-align">
+                                Tiene cuotas vencidas. Realice el pago correspondiente. Tenga en cuenta que se le cobrará un interes
+                                dependiendo la cantidad de días que hayan transcurrido desde el vencimiento de las mismas. 
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="operaciones.xhtml" class="blue-text">Pagar cuotas vencidas</a>
+                        </div>
+                    </div>
+                </ui:fragment>
+                <ui:fragment rendered="#{usuario.count_pendiente eq 1}">
+                    <div class="card">
+                        <h4 class="grey-text center-align"><i class="large material-icons">system_update_alt</i></h4>
+                        <h4 class="flow-text center-align">
+                            Cuota pendiente de pago
+                        </h4>
+                        <p class="grey-text center-align">
+                            Realice el pago correspondiente al mes de #{usuario.pendiente.periodo}.
+                        </p>
+                        <p class="grey-text center-align">
+                            Vence el #{util.argDate(usuario.pendiente.fechaVencimiento)}
+                        </p>
+                        <div class="card-content">
+                            <h:form id="form">
+                                <p:remoteCommand name="calcularTotal" update="imp" action="#{usuario.calculateTotal()}" />
+                                <div class="row">
+                                    <div class="col s12 m6 l6">
+                                        <div class="input-field">
+                                            <i class="material-icons prefix grey-text">perm_contact_calendar</i>
+                                            <h:inputText id="cantidad_empleados" required="true" converterMessage="Valor de cantidad en empleados no válido" requiredMessage="Cantidad de empleados obligatorio" value="#{usuario.pendiente.cantidadEmpleados}" styleClass="validate" >
+                                                <f:convertNumber integerOnly="true" minIntegerDigits="1" maxIntegerDigits="5" />
+                                                <f:validator validatorId="naturalNumberValidator" />
+                                            </h:inputText>
+                                            <label for="cantidad_empleados">Cantidad de empleados</label>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m6 l6">
+                                        <div class="input-field">
+                                            <i class="material-icons prefix grey-text">info</i>
+                                            <h:inputText onkeyup="calcularTotal()" onblur="calcularTotal()" onfocus="calcularTotal()" id="remuneracion" required="true" converterMessage="Valor de remuneraciones no valido" requiredMessage="Remuneración total obligatoria" value="#{usuario.pendiente.remuneracionTotal}" styleClass="validate">
+                                                <f:convertNumber minFractionDigits="4" maxIntegerDigits="10" />
+                                                <f:validator validatorId="doublePositiveNumberValidator" />
+                                            </h:inputText>
+                                            <label for="remuneracion">Remuneración total</label>
+                                        </div>
+                                    </div>
+                                    <div class="col s12">
+                                        <h:panelGroup layout="block" id="imp">
+                                            <p class="flow-text center-align"><span class="green-text">Cuota sindical: $</span><h:outputText value="#{usuario.pendiente.importe}" /></p>
+                                        </h:panelGroup>
+                                    </div>
+                                    <div class="col s12 m12 l4">
+                                        <p:commandLink ajax="false" actionListener="#{usuario.registrarPago()}" styleClass="waves-effect waves-light btn-large  blue-grey darken-1 center-align" value="Abonar">
+                                            <i class="material-icons right">play_arrow</i>
+                                        </p:commandLink>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </ui:fragment>
+                  <div class="card">
+                      <div class="card-content">
+                          <h4 class="grey-text">Cuotas emitidas</h4>
+                          <p>Recuerde que es su responsabilidad abonar aquellas que tiene pendientes o en mora.</p>
+                      </div>
+                      <div class="card-action">
+                          <ui:fragment rendered="#{usuario.cuotas().size() gt 0}">
+                              <table class="responsive-table bordered">
+                                <thead>
+                                  <tr>
+                                      <th data-field="name">Periodo</th>
+                                      <th data-field="price">Importe</th>
+                                      <th data-field="descarga">Imprimir comprobante</th>
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                    <h:form>
+                                        <ui:repeat value="#{usuario.cuotas()}" var="cuota">
+                                          <tr>
+                                            <td>#{cuota.periodo}-#{util.year(cuota.fechaEmision)}</td>
+                                            <td>#{cuota.importe}</td>
+                                            <td>
+                                                <!--<a class="btn-floating btn-large waves-effect waves-light blue-grey darken-1"><i class="material-icons">print</i></a>-->
+                                                <h:commandLink actionListener="#{usuario.imprimirComprobante(cuota)}" styleClass="btn-floating btn-large waves-effect waves-light blue-grey darken-1">
+                                                    <i class="material-icons">print</i>
+                                                </h:commandLink>
+                                            </td>
+                                          </tr>
+                                      </ui:repeat>
+                                    </h:form>
+                                </tbody>
+                              </table>
+                          </ui:fragment>
+                          <ui:fragment rendered="#{usuario.cuotas().size() eq 0}">
+                              <p class="flow-text grey-text">
+                                  No se encontraron cuotas para imprimir. Las pendientes o en mora no se pueden imprimir hasta que las haya cancelado.
+                              </p>
+                          </ui:fragment>
+                      </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+      <script type="text/javascript" src="../js/materialize.js"></script>
+      <script>
+        $(".button-collapse").sideNav();
+        $('.tooltipped').tooltip({delay: 50});
+      </script>
+      <!--prism-->
+      <script type="text/javascript" src="../js/prism.js"></script>
+    </h:body>
+
+  </html>

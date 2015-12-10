@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-dic-2015 16:29:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.sindicato.entities.Mensaje" table="mensaje" schema="public" optimistic-lock="version">
+        <comment>Representa la acci&#243;n de enviar un mensaje al administrador del sistema.</comment>
+        <id name="id" type="string">
+            <column name="id" length="32" />
+            <generator class="identity" />
+        </id>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fecha_creacion" length="35" not-null="true" />
+        </property>
+        <property name="fechaUltimaModificacion" type="timestamp">
+            <column name="fecha_ultima_modificacion" length="35" not-null="true" />
+        </property>
+        <property name="contenido" type="string">
+            <column name="contenido" not-null="true">
+                <comment>Representa el texto que envia la persona</comment>
+            </column>
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="75" not-null="true">
+                <comment>Nombre de la persona que envia el mensaje. Si el usuario esta registrado entonces el nombre debe ser igual al nombre del responsable de la
+                empresa.</comment>
+            </column>
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="75" not-null="true">
+                <comment>Representa el mail del usuario que envia el mensaje. Si el usuario esta registrado este dato es igual al email de la tabla "Registracion" del mismo
+                usuario.</comment>
+            </column>
+        </property>
+        <property name="leido" type="boolean">
+            <column name="leido" not-null="true">
+                <comment>Representa el estado del mensaje. TRUE si el administrador ya lo leyo, FALSE en otro caso.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

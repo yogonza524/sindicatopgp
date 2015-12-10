@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-dic-2015 16:29:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.sindicato.entities.Config" table="config" schema="public" optimistic-lock="version">
+        <comment>Esta tabla solo puede contener un registro y solo uno. Contiene los dias del mes en los cuales se emite y vencen las cuotas de las empresas.</comment>
+        <id name="id" type="string">
+            <column name="id" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="diaEmision" type="int">
+            <column name="dia_emision" not-null="true" />
+        </property>
+        <property name="diaVencimiento" type="int">
+            <column name="dia_vencimiento" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fecha_creacion" length="35" />
+        </property>
+        <property name="fechaUltimaModificacion" type="timestamp">
+            <column name="fecha_ultima_modificacion" length="35" />
+        </property>
+    </class>
+</hibernate-mapping>

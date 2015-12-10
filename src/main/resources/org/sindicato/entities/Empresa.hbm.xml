@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-dic-2015 16:29:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.sindicato.entities.Empresa" table="empresa" schema="public" optimistic-lock="version">
+        <comment>Representa la entidad afiliada al sindicato</comment>
+        <id name="idUsuario" type="string">
+            <column name="id_usuario" length="32" />
+            <generator class="foreign">
+                <param name="property">usuario</param>
+            </generator>
+        </id>
+        <one-to-one name="usuario" class="org.sindicato.entities.Usuario" constrained="true"></one-to-one>
+        <property name="responsable" type="string">
+            <column name="responsable" length="75" not-null="true" />
+        </property>
+        <property name="actividadPrincipal" type="string">
+            <column name="actividad_principal" length="75" not-null="true" />
+        </property>
+        <property name="fechaInicioActividad" type="date">
+            <column name="fecha_inicio_actividad" length="13" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="75" not-null="true" />
+        </property>
+        <property name="domicilio" type="string">
+            <column name="domicilio" length="75" not-null="true" />
+        </property>
+        <property name="telefonoUno" type="string">
+            <column name="telefono_uno" length="20" />
+        </property>
+        <property name="telefonoDos" type="string">
+            <column name="telefono_dos" length="20" />
+        </property>
+        <property name="fechaEmisionProximaCuota" type="date">
+            <column name="fecha_emision_proxima_cuota" length="13" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fecha_creacion" length="35" />
+        </property>
+        <property name="fechaUltimaModificacion" type="timestamp">
+            <column name="fecha_ultima_modificacion" length="35" />
+        </property>
+        <property name="razonSocial" type="string">
+            <column name="razon_social" length="75" not-null="true" />
+        </property>
+        <property name="cuit" type="string">
+            <column name="cuit" length="13" not-null="true" />
+        </property>
+        <set name="cuotas" table="cuota" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empresa" length="32" not-null="true" />
+            </key>
+            <one-to-many class="org.sindicato.entities.Cuota" />
+        </set>
+    </class>
+</hibernate-mapping>

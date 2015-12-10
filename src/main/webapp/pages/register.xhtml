@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="html_add" xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Sindicato de Petroleo y Gas Privado - Santa Cruz</title>
+        <link rel="shortcut icon" href="#{resource['img:icon.png']}" />
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="materialize.css" />
+        <h:outputScript library="js" name="materialize.js" />
+        <h:outputScript library="js" name="app.js" />
+        <h:outputScript library="js" name="modernizr.js" />
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    </h:head>
+    <h:body class="fondo-grey">
+       <nav class="layer">
+          <div class="nav-wrapper container">
+            <div class="col s12">
+              <a href="../index.xhtml" class="breadcrumb">Inicio</a>
+              <a href="#!" class="breadcrumb">Registración</a>
+            </div>
+          </div>
+        </nav>
+        <div class="container">
+            <blockquote class="grey-text">
+                Los datos que va a declarar son confidenciales y es su responsabilidad no compartirlo con nadie. Cualquier uso
+                indebido de los mismos facultan a la administración de iniciar las acciones legales pertinentes.
+            </blockquote>
+            <h:form>
+                <p:growl autoUpdate="true" />
+                <div class="row">
+                    <div class="input-field col s12 m6 l4">
+                        <i class="material-icons grey-text prefix">person_pin</i>
+                        <h:inputText id="username" required="true" validatorMessage="Usuario no válido" value="#{register.user.username}" requiredMessage="Usuario obligatorio">
+                            <f:validateRegex pattern="^[a-z0-9_-]{3,25}$" />
+                        </h:inputText>
+                        <h:outputLabel for="username" value="Usuario" />
+                    </div>
+                    <div class="input-field col s12 m6 l4">
+                        <i class="material-icons grey-text prefix">lock</i>
+                        <h:inputText id="email" required="true" validatorMessage="Email con formato incorrecto" value="#{register.user.email}" requiredMessage="Email obligatorio">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </h:inputText>
+                        <h:outputLabel for="email" value="Email" />
+                    </div>
+                    <div class="input-field col s12 m6 l4">
+                        <i class="material-icons grey-text prefix">lock</i>
+                        <h:inputSecret id="pass" required="true" validatorMessage="La contraseña debe tener de 6 a 40 caracteres" value="#{register.user.password}" requiredMessage="Contraseña obligatoria">
+                            <f:validateLength minimum="6" maximum="40" />
+                        </h:inputSecret>
+                        <h:outputLabel for="pass" value="Contraseña" />
+                    </div>
+                    <div class="input-field col s12 m6 l4">
+                        <i class="material-icons grey-text prefix">lock</i>
+                        <h:inputSecret id="repass" required="true" validatorMessage="La contraseña repetida debe tener de 6 a 40 caracteres" value="#{register.repass}" requiredMessage="Contraseña a repetir obligatoria">
+                            <f:validateLength minimum="6" maximum="40" />
+                        </h:inputSecret>
+                        <h:outputLabel for="repass" value="Repetir contraseña" />
+                    </div>
+                    <div class="col s12">
+                        <h:commandLink styleClass="waves-effect waves-light btn-large white-text" actionListener="#{register.execute()}">
+                            <i class="material-icons right">play_arrow</i>Listo
+                        </h:commandLink>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        <script type="text/javascript" src="../js/materialize.js"></script>
+        <script>
+          $(".button-collapse").sideNav();
+          $('.tooltipped').tooltip({delay: 50});
+        </script>
+        <!--prism-->
+        <script type="text/javascript" src="../js/prism.js"></script>
+    </h:body>
+</html>
+

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-dic-2015 16:29:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.sindicato.entities.Cuota" table="cuota" schema="public" optimistic-lock="version">
+        <comment>Representa la cuota mensual que abona el responsable de cada empresa</comment>
+        <composite-id name="id" class="org.sindicato.entities.CuotaId">
+            <key-property name="id" type="string">
+                <column name="id" length="32" />
+            </key-property>
+            <key-property name="idEmpresa" type="string">
+                <column name="id_empresa" length="32" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="empresa" class="org.sindicato.entities.Empresa" update="false" insert="false" fetch="select">
+            <column name="id_empresa" length="32" not-null="true" />
+        </many-to-one>
+        <property name="fechaEmision" type="date">
+            <column name="fecha_emision" length="13" not-null="true" />
+        </property>
+        <property name="fechaVencimiento" type="date">
+            <column name="fecha_vencimiento" length="13" not-null="true" />
+        </property>
+        <property name="cantidadEmpleados" type="java.lang.Integer">
+            <column name="cantidad_empleados" />
+        </property>
+        <property name="importe" type="java.lang.Double">
+            <column name="importe" precision="17" scale="17" />
+        </property>
+        <property name="intereses" type="java.lang.Double">
+            <column name="intereses" precision="17" scale="17" />
+        </property>
+        <property name="periodo" type="string">
+            <column name="periodo" length="32">
+                <comment>Representa el mes en el cual se cobra la cuota</comment>
+            </column>
+        </property>
+        <property name="idEstado" type="string">
+            <column name="id_estado" length="32" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fecha_creacion" length="35" not-null="true" />
+        </property>
+        <property name="fechaUltimaModificacion" type="timestamp">
+            <column name="fecha_ultima_modificacion" length="35" not-null="true" />
+        </property>
+        <property name="remuneracionTotal" type="java.lang.Double">
+            <column name="remuneracion_total" precision="17" scale="17" />
+        </property>
+    </class>
+</hibernate-mapping>

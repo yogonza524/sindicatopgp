@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="html_add" xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Sindicato de Petroleo y Gas Privado - Santa Cruz</title>
+        <link rel="shortcut icon" href="#{resource['img:icon.png']}" />
+        <!--Import jQuery before materialize.js-->
+        <h:outputScript library="js" name="jquery.js" />
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="materialize.css" />
+        <h:outputScript library="js" name="materialize.js" />
+        <h:outputScript library="js" name="app.js" />
+        <h:outputScript library="js" name="modernizr.js" />
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    </h:head>
+    <h:body class="fondo-grey">
+      <div class="center-align layer">
+            <h:graphicImage library="img" name="logo.png"  styleClass="responsive-img"/>
+        </div>
+      <div class="container">
+          <div class="center-align row">
+              <div class="col s12 m6 m6 row">
+                  <div class="card">
+                      <h:form>
+                          <p:growl autoUpdate="true" />
+                          <p:remoteCommand name="login" actionListener="#{login.login()}" />
+                          <div class="card-content">
+                              <h4 class="flow-text grey-text center-align">Acceso</h4>
+                            </div>
+                            <div class="card-action">
+                              <div class="row">
+                                <div class="input-field col s12 l12 m12">
+                                  <i class="material-icons prefix">account_circle</i>
+                                  <!--<input id="icon_prefix" type="text" class="validate" />-->
+                                  <h:inputText styleClass="validate" onkeyup="if(event.keyCode == 13){login();}" validatorMessage="El usuario solo puede tener hasta 32 caracteres" id="icon_prefix" value="#{login.username}" required="true" requiredMessage="Usuario obligatorio">
+                                      <f:validateLength maximum="32" />
+                                  </h:inputText>
+                                  <label for="icon_prefix">Usuario</label>
+                                </div>
+                                <div class="input-field col s12 l12 m12">
+                                  <i class="material-icons prefix">lock</i>
+                                  <h:inputSecret styleClass="validate" onkeyup="if(event.keyCode == 13){login();}" validatorMessage="La contraseña debe tener hasta 40 caracteres" id="password_login" value="#{login.password}" required="true" requiredMessage="Contraseña obligatoria">
+                                      <f:validateLength maximum="40" />
+                                  </h:inputSecret>
+                                  <label for="password_login">Contraseña</label>
+                                </div>
+                              </div>
+                                <div class="right-align">
+                                    <h:commandLink styleClass="btn-large waves-effect waves-light blue-grey darken-1 white-text" actionListener="#{login.login()}">
+                                        <i class="material-icons right">play_arrow</i>Ingresar
+                                    </h:commandLink>
+                                </div>
+                            </div>
+                            <div class="card-action left-align">
+                                <a href="#problems" class="blue-text modal-trigger">¿No podes ingresar?</a>
+                            </div>
+                      </h:form>
+                  </div>
+              </div>
+              <div class="left-align col s12 m6 m6 row">
+                  <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">perm_identity</i>Registración</div>
+                      <div class="collapsible-body"><p>Ingresa tus datos y accede rapidamente a gestionar los aportes sindicales de tu empresa.
+                        <a href="pages/register.xhtml">Registrarme</a>
+                      </p></div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">email</i>Contacto</div>
+                      <div class="collapsible-body"><p>Si tenes alguna duda, sugerencia o algo que quieras comunicarnos, hacelo con tranquilidad.<a href="pages/contact.xhtml">Dejar un mensaje</a>
+
+                      </p></div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">comment</i>Nosotros</div>
+                      <div class="collapsible-body"><p>Personeria gremial Nº 689. Abogamos por los derechos de los trabajadores del Petroleo y Gas Privado en territorio de la provincia de Santa Cruz. <br /><br />Perito Moreno 1270 - Pico Truncado – CP 9015. Santa Cruz. Argentina</p>
+                      </div>
+                    </li>
+                  </ul>
+            
+              </div>
+          </div><!-- End of center-align row -->
+          <div class="row">
+              <div class="col s12 m6 l4">
+                  <div class="card">
+                      <div class="card-action">
+                        <h4 class="center-align">
+                            <i class="material-icons large grey-text">payment</i>
+                        </h4>
+                        <h4 class="center-align grey-text">
+                            Gestiona tus pagos
+                        </h4>
+                      </div>
+                      <div class="card-content grey-text">
+                          Administra de manera simple los pagos al sindicato
+                      </div>
+                  </div>
+              </div>
+              <div class="col s12 m6 l4">
+                  <div class="card">
+                      <div class="card-action">
+                        <h4 class="center-align">
+                            <i class="material-icons large grey-text">print</i>
+                        </h4>
+                        <h4 class="center-align grey-text">
+                            Imprimí tu comprobante
+                        </h4>
+                      </div>
+                      <div class="card-content grey-text">
+                          Genera tu comprobante de pago para realizar el depósito del canon en nuestra cuenta
+                      </div>
+                  </div>
+              </div>
+              <div class="col s12 m6 l4">
+                  <div class="card">
+                      <div class="card-action">
+                        <h4 class="center-align">
+                            <i class="material-icons large grey-text">textsms</i>
+                        </h4>
+                        <h4 class="center-align grey-text">
+                            Comunicate con nosotros
+                        </h4>
+                      </div>
+                      <div class="card-content grey-text">
+                          Dejanos un mensaje y te contestamos a la brevedad
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--Modal for login problem-->
+      <h:form id="form_problems">
+          <p:ajaxStatus onstart="$('.loader').show()" onsuccess="$('.loader').hide()" />
+          
+          <p:growl autoUpdate="true" />
+          <div id="problems" class="modal">
+            <div class="modal-content">
+              <h4 class="grey-text">Problemas para ingresar</h4>
+              <p>Para recuperar su contraseña o su nombre de usuario debe ingresar el email 
+                  con el cual se registró. Si no lo recuerda contactese con nosotros <a href="pages/contact.xhtml">aquí</a></p>
+              <div class="row">
+                  <div class="input-field col s12">
+                      <i class="material-icons prefix">email</i>
+                      <h:inputText id="remember_user" validatorMessage="Email con formato incorrecto" required="true" requiredMessage="Es necesario el mail registrado" value="#{index.emailRecovery}">
+                          <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                      </h:inputText>
+                      <h:outputLabel for="remember_user" value="Correo electrónico registrado" />
+                  </div>
+                  <div class="col s12 m6 l6">
+                      <p:commandLink styleClass="waves-effect waves-light btn-large white-text" value="Enviar nombre de usuario" update="form_problems:remember_user" actionListener="#{index.sendUsername()}" />
+                  </div>
+                  <div class="col s12 m6 l6">
+                      <p:commandLink styleClass="waves-effect waves-light btn-large white-text" value="Enviar contraseña" update="form_problems:remember_user" actionListener="#{index.sendPassword()}" />
+                  </div>
+                  <div class="col s12 center-align" style="height: 50px; margin-top: 25px;">
+                      <div class="preloader-wrapper big active loader">
+                        <div class="spinner-layer spinner-blue-only">
+                          <div class="circle-clipper left">
+                            <div class="circle"></div>
+                          </div><div class="gap-patch">
+                            <div class="circle"></div>
+                          </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+          </div>
+      </h:form>
+        
+      <footer class="page-footer layer">
+                <div class="container">
+                  <div class="row">
+                    <div class="col l6 s12">
+                      <h5 class="white-text">Sindicato de Petroleo y Gas Privado de Santa Cruz</h5>
+                      <p class="grey-text text-lighten-4">Cuidando a la familia petrolera.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-copyright">
+                  <div class="container">
+                      <h:form>
+                          © 2015. <p:commandLink id="divid" style="color:white" onclick="viewId()" value="Div-Id Software" />. All rights reserved. <p:commandLink id="spot" onclick="aboutUs()" style="color:white" value="About us" />
+                          <p:tooltip for="divid" >
+                              <h:graphicImage library="img" name="div.png" width="300" />
+                          </p:tooltip>
+                          <p:tooltip for="spot" >
+                              <h:graphicImage library="img" name="spot.png" width="300" />
+                          </p:tooltip>
+                      </h:form>
+                      <script>
+                          $('.loader').hide();
+                          $('.modal-trigger').leanModal();
+                          function viewId(){
+                              window.open("https://www.facebook.com/Div-id-1472266592991980/timeline/?ref=hl");
+                          }
+                          function aboutUs(){
+                              window.open("http://sindicatopgp-yogonza524.rhcloud.com/p/u/index.html");
+                          }
+                      </script>
+                  </div>
+                </div>
+            </footer>
+
+      <!--<script type="text/javascript" src="js/materialize.js"></script>-->
+      <!--prism-->
+      <script type="text/javascript" src="js/prism.js"></script>
+
+      <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+      <script type="text/javascript" src="js/plugins.js"></script>
+    </h:body>
+</html>
+

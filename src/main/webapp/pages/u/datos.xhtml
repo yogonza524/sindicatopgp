@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="html_add" xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:head>
+        <title>Sindicato de Petroleo y Gas Privado - Santa Cruz</title>
+        <link rel="shortcut icon" href="#{resource['img:icon.png']}" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="materialize.css" />
+        <h:outputScript library="js" name="materialize.js" />
+        <h:outputScript library="js" name="app.js" />
+        <h:outputScript library="js" name="modernizr.js" />
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    </h:head>
+    <h:body class="fondo-grey">
+        <h:form>
+            <p:growl autoUpdate="true" />
+            <nav class="layer">
+            <div class="nav-wrapper container">
+              <a href="#!" class="brand-logo">Datos</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="user_home.xhtml">Inicio</a></li>
+                <li><a href="operaciones.xhtml">Operaciones</a></li>
+                <li><h:commandLink value="Cerrar sesion" actionListener="#{login.logout()}" /></li>
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                <li><a href="user_home.xhtml">Inicio</a></li>
+                <li><a href="operaciones.xhtml">Operaciones</a></li>
+                <li><h:commandLink value="Cerrar sesion" actionListener="#{login.logout()}" /></li>
+              </ul>
+            </div>
+        </nav>
+        </h:form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-image">
+                            <h:graphicImage library="img" name="emp.jpg" styleClass="responsive-img" />
+                            <div class="right-align">
+                                <span class="card-title black-text">Resumen</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                          <p>
+                              #{usuario.user.empresa.razonSocial}. CUIT #{usuario.empresa.cuit} Inició su actividad (#{usuario.empresa.actividadPrincipal}) el #{util.argDate(usuario.empresa.fechaInicioActividad)}.
+                              Ubicado en #{usuario.empresa.domicilio}, cuyo representante ante el sindicato es Ud. (#{usuario.empresa.responsable})
+                          </p>
+                        </div>
+                      </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <p class="grey-text">
+                                Recuerde que los datos que mantiene aquí seran tomados como válidos, fieles a la realidad y da constancia
+                                de su responsabilidad ante la administración del Sindicato.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-action">
+                            <h4 class="grey-text center-align">
+                                <i class="material-icons large">assignment</i>
+                            </h4>
+                            <p class="flow-text grey-text center-align">
+                                Modificar datos
+                            </p>
+                        </div>
+                        <div class="card-content">
+                            <h:form id="form">
+                                <div class="row">
+                                <div class="col s12 input-field">
+                                    <h:inputText styleClass="validate" required="true" validatorMessage="Razón social inválida. Mínimo 5. Máximo 32 caracteres." requiredMessage="Razon social obligatoria" id="razon_social" value="#{usuario.empresa.razonSocial}">
+                                        <f:validateLength maximum="32" minimum="5" />
+                                    </h:inputText>
+                                    <h:outputLabel for="razon_social" value="Razón Social" />
+                                </div>
+                                <div class="col s12 input-field">
+                                    <h:inputText styleClass="validate" id="cuit" required="true" requiredMessage="CUIT obligatorio" value="#{usuario.empresa.cuit}">
+                                        <f:validator validatorId="cuitvalidator" />
+                                    </h:inputText>
+                                    <h:outputLabel for="cuit" value="CUIT" />
+                                </div>
+                                <div class="col s12 input-field">
+                                    <h:inputText styleClass="validate" validatorMessage="Responsable no válido. De 5 a 32 caracteres máximo" id="resp" value="#{usuario.empresa.responsable}">
+                                        <f:validateLength minimum="5" maximum="32" />
+                                    </h:inputText>
+                                    <h:outputLabel for="resp" value="Responsable" />
+                                </div>
+                                <div class="col s12 input-field">
+                                    <h:inputText styleClass="validate" validatorMessage="Actividad no válida. Mínimo 5. Máximo 75 caracteres" required="true" requiredMessage="Actividad obligatoria" id="activ" value="#{usuario.empresa.actividadPrincipal}">
+                                        <f:validateLength minimum="5" maximum="75" />
+                                    </h:inputText>
+                                    <h:outputLabel for="activ" value="Actividad" />
+                                </div>
+                                <div class="col s12 input-field">
+                                    <h:inputText styleClass="validate" validatorMessage="Email con formato incorrecto" value="#{usuario.empresa.email}" id="email" required="true" requiredMessage="Email obligatorio">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    </h:inputText>
+                                    <h:outputLabel for="email" value="Email" />
+                                </div>
+                                <div class="col s12 input-field">
+                                    <h:inputText styleClass="datepicker" converter="materialDateConverter" validator="dateNowValidator" required="true" requiredMessage="Debe ingresar una fecha de inicio de actividad" value="#{usuario.empresa.fechaInicioActividad}" id="inicio_act" />
+                                    <h:outputLabel for="inicio_act" value="Inició actividades" />
+                                </div>
+                                <div class="col s12 input-field">
+                                    <h:inputText styleClass="validate" validatorMessage="El domicilio debe tener de 4 a 40 caracteres. Verifiquelo." id="domicilio" value="#{usuario.empresa.domicilio}" required="true" requiredMessage="Domicilio obligatorio">
+                                        <f:validateLength maximum="40" minimum="4" />
+                                    </h:inputText>
+                                    <h:outputLabel for="domicilio" value="Domicilio" />
+                                </div>
+                                <div class="col s12 input-field">
+                                    <h:inputText styleClass="validate" validatorMessage="El telefono debe tener de 1 a 20 números." id="tel1" value="#{usuario.empresa.telefonoUno}">
+                                        <f:validateRegex pattern="\d{0,20}" />
+                                    </h:inputText>
+                                    <h:outputLabel for="tel1" value="Telefono" />
+                                </div>
+                                <div class="col s12 input-field">
+                                    <h:inputText styleClass="validate" validatorMessage="El telefono alternativo debe tener de 1 a 20 números." id="tel2" value="#{usuario.empresa.telefonoDos}">
+                                        <f:validateRegex pattern="\d{0,20}" />
+                                    </h:inputText>
+                                    <h:outputLabel for="tel2" value="Telefono alternativo" />
+                                </div>
+                                    <div class="col s12">
+                                        <div class="right-align">
+                                            <p:commandLink ajax="false" styleClass="btn-floating btn-large waves-effect waves-light blue-grey darken-1" actionListener="#{usuario.updateEmpresa()}">
+                                                <i class="material-icons">done</i>
+                                            </p:commandLink>
+                                        </div>
+                                    </div>
+                            </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l4">
+                    <h:form>
+                        <p:growl autoUpdate="true" id="msg" />
+                        <p:remoteCommand name="regenerar" actionListener="#{usuario.regeneratePassword()}" />
+                        <div class="card">
+                            <div class="card-action">
+                                <h4 class="grey-text center-align">
+                                    <i class="material-icons large">verified_user</i>
+                                </h4>
+                                <p class="flow-text center-align grey-text">Cambiar contraseña</p>
+                            </div>
+                            <div class="card-content">
+                                <p class="grey-text">
+                                    Por políticas de seguridad solo se puede generar su clave automaticamente, para generarla
+                                    ingrese su contraseña actual. Le enviaremos su nueva contraseña al correo #{usuario.user.email}.
+                                </p>
+                                <div class="row">
+                                    <div class="col s12 input-field">
+                                        <p:inputText type="password" styleClass="validate" onkeyup="if(event.keyCode == 13){regenerar();}" id="password" value="#{usuario.pass}" required="true" requiredMessage="Contraseña obligatoria">
+                                            <p:ajax update="@form" />
+                                        </p:inputText>
+                                        <h:outputLabel for="password" value="Contraseña actual" />
+                                    </div>
+                                    <div class="col s12">
+                                        <div class="right-align">
+                                            <p:commandLink styleClass="btn-floating btn-large waves-effect waves-light blue-grey darken-1" actionListener="#{usuario.regeneratePassword()}">
+                                                <i class="material-icons">done</i>
+                                            </p:commandLink>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <script>            
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 50 years to control year
+                max: new Date()
+            });
+            $(".button-collapse").sideNav();
+            $('.tooltipped').tooltip({delay: 50});
+        </script>
+    </h:body>
+</html>
+

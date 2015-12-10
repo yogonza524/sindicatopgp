@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-dic-2015 16:29:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.sindicato.entities.Usuario" table="usuario" schema="public" optimistic-lock="version">
+        <comment>Contiene al conjunto de usuarios registrados para utilizar el sistema</comment>
+        <id name="id" type="string">
+            <column name="id" length="32" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="rol" class="org.sindicato.entities.Rol" fetch="select">
+            <column name="id_rol" length="32" />
+        </many-to-one>
+        <property name="username" type="string">
+            <column name="username" length="32" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="40" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fecha_creacion" length="35" />
+        </property>
+        <property name="fechaUltimaModificacion" type="timestamp">
+            <column name="fecha_ultima_modificacion" length="35" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="ultimaConexion" type="timestamp">
+            <column name="ultima_conexion" length="35" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="75" not-null="true" unique="true" />
+        </property>
+        <set name="registracionsForEmail" table="registracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="email" length="32" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="org.sindicato.entities.Registracion" />
+        </set>
+        <one-to-one name="registracionById" class="org.sindicato.entities.Registracion"></one-to-one>
+        <one-to-one name="empresa" class="org.sindicato.entities.Empresa"></one-to-one>
+    </class>
+</hibernate-mapping>

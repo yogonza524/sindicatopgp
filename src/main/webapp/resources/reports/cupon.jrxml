@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Example" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1dedd073-5711-47de-b358-fdfff31c7910">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="42"/>
+	<parameter name="razon_social" class="java.lang.String"/>
+	<parameter name="domicilio" class="java.lang.String"/>
+	<parameter name="periodo" class="java.lang.String"/>
+	<parameter name="cantidad_empleados" class="java.lang.Integer"/>
+	<parameter name="total" class="java.lang.Double"/>
+	<parameter name="importe" class="java.lang.Double"/>
+	<parameter name="intereses" class="java.lang.Double"/>
+	<parameter name="tot" class="java.lang.Double"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="129" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="-10" width="90" height="83" uuid="8306f077-c360-44d3-a40e-6256dbcf0ed3"/>
+				<imageExpression><![CDATA["http://i.imgur.com/4rU79uD.png?1"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="110" y="0" width="434" height="60" forecolor="#6B6B6B" uuid="ef50239e-d96f-480a-8329-457aba6e8df0"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SINDICATO DE PETROLEO Y GAS PRIVADO - SANTA CRUZ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="-20" y="80" width="595" height="3" backcolor="#8A8A8A" uuid="6ca03098-82b6-46f6-9d68-1d6d3b4f51b2"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="rgba(0, 0, 0, 0.0)"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="90" width="290" height="30" uuid="a968296a-ebc3-4b43-851d-654e2d57369d"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[BANCO DE LA NACION ARGENTINA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="90" width="216" height="30" uuid="c0511f1f-c711-462c-a7e4-fc8ee9946eac"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[CTA. CTE Nº 172-10900/34]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="-20" y="120" width="595" height="3" backcolor="#8A8A8A" uuid="1591fb88-ab91-4add-8124-6c69270619a7"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="rgba(0, 0, 0, 0.0)"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="110" y="55" width="220" height="20" forecolor="#4F4F4F" uuid="46906195-1dbc-4879-8e6b-ade8d8cc3f45"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Personeria Gremial Nº 879]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="8" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="397" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="79" width="595" height="30" backcolor="#F7F7F7" uuid="1145fdcc-2e20-4d18-b3b3-e2318bedb8d4"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="rgba(255, 255, 255, 0.0)"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-20" y="49" width="595" height="30" backcolor="#F2F2F2" uuid="7977edf4-999e-4b58-9d3f-b36625dbe130"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="rgba(255, 255, 255, 0.0)"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="388" y="240" width="145" height="100" backcolor="#F7F7F7" uuid="f30c3199-3dfb-43c0-9b4f-ad41dcba3c78"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid" lineColor="#969696"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-20" y="18" width="595" height="30" backcolor="#F7F7F7" uuid="8598f89b-afb5-41ea-b876-c7cbfe32c4f7"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="rgba(255, 255, 255, 0.0)"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-20" y="109" width="595" height="30" backcolor="#F2F2F2" uuid="e0ac03c4-ed0e-45f2-97a8-0da71341c4ec"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="rgba(255, 255, 255, 0.0)"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-20" y="-13" width="595" height="30" backcolor="#F2F2F2" uuid="c64cffe2-19dd-47fd-8fc8-1a2fe84a371c"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="rgba(255, 255, 255, 0.0)"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="-5" width="110" height="20" uuid="8db0aea5-7ba9-4bdc-956a-db5400605886"/>
+				<textElement>
+					<font fontName="SansSerif" size="14"/>
+				</textElement>
+				<text><![CDATA[Razón Social:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="-20" y="139" width="595" height="30" backcolor="#F7F7F7" uuid="4d8ef429-3f3b-4d20-9cac-ea5e1c7e7c6e"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="rgba(255, 255, 255, 0.0)"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="21" width="100" height="20" uuid="345599ba-9b34-4e43-a99f-dc290df56237"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<text><![CDATA[Domicilio:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="-20" y="169" width="595" height="30" backcolor="#F2F2F2" uuid="cf5c0724-8304-4a55-8798-3e18802a7dce"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="rgba(255, 255, 255, 0.0)"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="11" y="115" width="260" height="20" uuid="84aedd1c-654d-4d7e-8f64-6db72231ce63"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<text><![CDATA[Total de remuneraciones: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="145" width="260" height="20" uuid="a48adefb-2828-47b1-8513-7c96aafda1b9"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<text><![CDATA[Cuota sindical: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="175" width="260" height="20" uuid="a9720c84-e64a-4f24-95cf-2ea2663a1135"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<text><![CDATA[Otros conceptos: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="250" width="76" height="30" uuid="475a1cb3-df4f-4f54-b430-84f7118cc5dd"/>
+				<textElement>
+					<font fontName="SansSerif" size="22"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="388" y="320" width="145" height="1" forecolor="#A1A1A1" uuid="695d05f6-4191-4478-94d1-bd4c9a3b8e84"/>
+			</line>
+			<staticText>
+				<reportElement x="-2" y="378" width="550" height="19" forecolor="#999999" uuid="3096437e-d916-474a-97df-7a2f3373141f"/>
+				<text><![CDATA[Documento no válido como factura, nota de crédito u otro. Prohibida su distribución y reproducción parcial o total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="271" y="20" width="100" height="20" uuid="c57e2a6f-6ece-42b5-9430-41ee90bc350c"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{domicilio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="56" width="151" height="20" uuid="72a963db-b021-4dc6-8c2f-7cabf6a185f5"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="85" width="162" height="20" uuid="71b621ae-b7cd-413d-9351-71848eaccb44"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cantidad_empleados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="-6" width="278" height="21" uuid="650fc33f-2a69-433f-b6e1-0a1f4ad2a90f"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{razon_social}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="283" y="115" width="100" height="20" uuid="9d07e3f9-dcc0-4386-b6fe-de1b56b94f35"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="281" width="76" height="40" uuid="38620b2a-022d-4593-b7d5-af001f813e13"/>
+				<textElement>
+					<font fontName="SansSerif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tot}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="145" width="100" height="20" uuid="630113ea-2bb0-489a-92a6-b26060b9e2d3"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{importe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="175" width="100" height="20" uuid="7d75df71-a3b6-4388-9484-bf690d4921a3"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{intereses}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="399" y="281" width="34" height="40" uuid="420a2849-c205-4312-99a5-88bf946a22e0"/>
+				<textElement>
+					<font fontName="SansSerif" size="16"/>
+				</textElement>
+				<text><![CDATA[AR$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="115" width="11" height="20" uuid="98712a25-bf66-4155-b049-9ad578db4299"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="145" width="11" height="20" uuid="d4392b38-ad20-4bf2-8a43-a8f34ccd6545"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="175" width="11" height="20" uuid="8cc02848-70f7-40d5-a3b4-c81e547ee9c2"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="85" width="260" height="20" uuid="6b78ee55-6edb-4c4d-af78-488415a48dfb"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<text><![CDATA[Cantidad de empleados: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="56" width="260" height="20" uuid="b8b741ea-b4a6-4a56-8df4-e5ab18c4da1c"/>
+				<textElement>
+					<font fontName="SansSerif" size="13"/>
+				</textElement>
+				<text><![CDATA[Correspondiente al mes de:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-dic-2015 16:29:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.sindicato.entities.Registracion" table="registracion" schema="public" optimistic-lock="version">
+        <comment>Representa la accion de registraci&#243;n de los responsables a cargo de la empresa (usuarios comunes).</comment>
+        <id name="idUsuario" type="string">
+            <column name="id_usuario" length="32" />
+            <generator class="foreign">
+                <param name="property">usuarioById</param>
+            </generator>
+        </id>
+        <many-to-one name="usuarioByEmail" class="org.sindicato.entities.Usuario" fetch="select">
+            <column name="email" length="32" not-null="true" unique="true" />
+        </many-to-one>
+        <one-to-one name="usuarioById" class="org.sindicato.entities.Usuario" constrained="true"></one-to-one>
+        <property name="completo" type="java.lang.Boolean">
+            <column name="completo" />
+        </property>
+        <property name="token" type="string">
+            <column name="token" length="32" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fecha_creacion" length="35" not-null="true" />
+        </property>
+        <property name="fechaUltimaModificacion" type="timestamp">
+            <column name="fecha_ultima_modificacion" length="35" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
